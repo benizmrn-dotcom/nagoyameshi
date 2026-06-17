@@ -80,3 +80,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
 
     Route::resource('terms', Admin\TermController::class)->only(['index', 'edit', 'update']);
 });
+
+
+
+Route::get('/debug-url', function () {
+    return [
+        'APP_URL'   => config('app.url'),
+        'ASSET_URL' => config('app.asset_url'),
+        'asset'     => asset('storage/test.jpg'),
+        'host'      => request()->getHost(),
+    ];
+});
