@@ -80,3 +80,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
 
     Route::resource('terms', Admin\TermController::class)->only(['index', 'edit', 'update']);
 });
+
+Route::get('/envcheck', function () {
+    return response()->json([
+        'APP_URL_ENV'    => env('APP_URL'),
+        'APP_URL_CONFIG' => config('app.url'),
+        'ASSET_URL'      => config('app.asset_url'),
+        'APP_ENV'        => env('APP_ENV'),
+        'HOST'           => request()->getHost(),
+        'ASSET_TEST'     => asset('images/logo.svg'),
+    ]);
+});
